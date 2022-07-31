@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OrganicCaseStudyApi.Controllers
@@ -14,10 +15,11 @@ namespace OrganicCaseStudyApi.Controllers
             this.context = context;
         }
 
-        [HttpGet]
+        [HttpGet(Name ="GetAllPaints"), Authorize]
         public async Task<ActionResult<List<OrganicApi>>> Get()
         {
-            
+            //var painst = context.Paints.G
+
             return Ok(await context.Paints.ToListAsync());
     }
     }
