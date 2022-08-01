@@ -1,0 +1,37 @@
+﻿@page "/"
+@using OrganicCaseStudyApi
+@using OrganicBlazorApp1.Services;
+@using Microsoft.AspNetCore.Mvc;
+@inject IDemirbasService demirService;
+
+<PageTitle>Index</PageTitle>
+
+<h1 @bind="searchString">Hello, world!</h1>
+
+@code
+{
+    [Parameter]
+    public string searchString { get; set; } = "defaultvalue";
+
+   /* public Index(List<string> searchString)
+    {
+        this.searchString = searchString;
+    }
+    */
+    private ActionResult<List<OrganicApi>> demirbasListesi = new List<OrganicApi>();
+    //var searchString;
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+       await Get();
+    }
+    
+
+    private async Task Get()
+    {
+        demirbasListesi = await demirService.Get(searchString);
+
+    }
+
+}

@@ -16,11 +16,11 @@ namespace OrganicCaseStudyApi.Controllers
         }
 
         [HttpGet(Name ="GetAllPaints"), Authorize]
-        public async Task<ActionResult<List<OrganicApi>>> Get()
+        public async Task<ActionResult<List<OrganicApi>>> Get(string searchString)
         {
-            //var painst = context.Paints.G
+            var paints = await context.Paints.Where(n => n.FirstName.Contains(searchString)).ToListAsync();
 
-            return Ok(await context.Paints.ToListAsync());
+            return Ok(paints);
     }
     }
 }
